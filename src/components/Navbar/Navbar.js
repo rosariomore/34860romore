@@ -1,16 +1,12 @@
-import '../Navbar.css'
 import '../Button/CartWidget/CartWidget.js'
+import { Link } from 'react-router-dom'
 
 const Navbar =() => {
     return (
-        <nav className="Navbar">
-        <div style={{display: "flex"}}>
-            <img src="./images/LogoETH.png"/>
-        </div>
-            <div style={{ backgroundColor: "#f6fcfc", display: "flex"}}>
-                <button className='button'>Paquetes</button>
-                <button className='button'>Promociones</button>
-                <button className='button'>Asistencias</button>
+        <nav style={{ displalay:'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+            <div >
+                <Link to="/category/vela" style={{ margin: 10 }}>Velas</Link>
+                <Link to="/category/difusor">Difusores</Link>
             </div>
         </nav>
     )
