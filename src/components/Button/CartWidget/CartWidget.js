@@ -1,4 +1,3 @@
-import Cart from "../../Cart/Cart";
 import { Link } from "react-router-dom"
 
 const CartWidget = ({ quantity }) => {
