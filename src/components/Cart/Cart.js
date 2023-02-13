@@ -7,7 +7,7 @@ const Cart = () => {
     const { cart } = useContext(CartContext)
     return (
         <div>
-            <h1>Estos son los productos de tu carrito</h1>
+            <h4>Estos son los productos de tu carrito</h4>
             <CartList cart={cart}/>
     
             {

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-// import { getProducts, getProductsByCategory} from "../../asyncMock"
 import ItemList from '../ItemList/ItemList'
 import { getDocs, collection, query, where } from 'firebase/firestore'
 import { db } from '../../services/firebase/firebaseConfig'
@@ -35,20 +34,11 @@ const ItemListContainer = ({ greeting }) => {
         }).finally(() => {
             setLoading(false)
         })
-
-        // const asyncFunction = categoryId ? getProductsByCategory : getProducts
-
-        // asyncFunction(categoryId).then(response => {
-        //     setProducts(response)
-        // }).catch(error => {
-        //     console.log(error)
-        // }).finally(() => {
-        //     setLoading(false)
-        // })          
+         
     }, [categoryId])
 
     if(loading) {
-        return <h1>Cargando productos...</h1>
+        return <h3>Cargando productos...</h3>
     }
 
     return (
