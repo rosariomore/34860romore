@@ -7,20 +7,32 @@ import { db } from "../../services/firebase/firebaseConfig"
 
     const [loading, setLoading] = useState(false)
     const [orderId, setOrderId] = useState("")
-    const { cart, total, clearCart} = useContext(CartContext)
+    const { cart, total, clearCart,} = useContext(CartContext)
+    const {Nombre, Email, Telefono, handleSubmit} = useState("")
 
+
+
+    const [buyer, setBuyer] = useState({
+            Nombre:"",
+            Email: "",
+            Telefono:""
+    })
+            
+    
+    const handleInputChange = (e) => {
+        setBuyer({
+            ...buyer,
+            [e.target.name]:e.target.value
+    })
+
+    }
     const createOrder = async (name, phone, email) => {
         setLoading(true)
-        
                 
         const objOrder = {
-            buyer: {
-                name,
-                phone,
-                email
-            },
-                items: cart, 
-                total 
+            buyer: buyer,
+            items: cart, 
+            total 
         }
 
         const batch = writeBatch(db) 
@@ -69,45 +81,54 @@ import { db } from "../../services/firebase/firebaseConfig"
     };
 
     if (loading) {
-        return <h1>Generando orden...</h1>;
+        return <h5>Generando orden...</h5>;
     } else if (orderId) {
         return (
             <div>
-                <h1>El Id de su compra es: {orderId}</h1>
+                <h5>El Id de su compra es: {orderId}</h5>
             </div>
         );
     } else {
         return (
             <div>
         <Fragment>
-        <form>
-                <h3>Checkout</h3>
+        <form onSubmit={handleSubmit}>
 
-            <div>
-                <h2>Ingrese sus datos</h2>
-            </div>
-
-            <div className="col-m-d">
-                <input
-                    placeholder="Ingrese su Nombre"
-                    className="form-control"
-                />
-            </div>
-            <div className="col-m-d">
-                <input
-                    placeholder="Ingrese su Apellido"
-                    className="form-control"
-                    />
-            </div>   
-            <div className="col-m-d">
-                    <button className="btn" type="submit">Enviar</button>
-            </div>
-            <button onClick={createOrder}>Generar orden</button>
+        <input
+            type="text"
+            name="Nombre"
+            placeholder="Nombre"
+            value={Nombre}
+            onChange={handleInputChange}
+            required
+        />
+            <br/>
+        <input
+            type="email"
+            name="Email"
+            placeholder="Email"
+            value={Email}
+            onChange={handleInputChange}
+            required
+        />
+            <br/>
+        <input
+            type="number"
+            name="Telefono"
+            placeholder="Telefono"
+            value={Telefono}
+            onChange={handleInputChange}
+            required
+        />
+            <br/>
+        <input
+            type="submit"
+            name="Finalizar compra"
+            className="btn btn-succes"
+        />            
         </form>
-            
+        <button onClick={createOrder}className="btn btn-outline-secondary">Generar orden</button>
         </Fragment>
-                
-                
             </div>
         );
     }

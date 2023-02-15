@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-// import { getProductById } from '../../asyncMock'
 import ItemDetail from '../ItemDetail/ItemDetail'
 
 import { getDoc, doc } from 'firebase/firestore'
@@ -29,20 +28,15 @@ const ItemDetailContainer = () => {
         }).finally(() => {
             setLoading(false)
         })
-        // getProductById(productId).then(response => {
-        //     setProduct(response)
-        // }).finally(() => {
-        //     setLoading(false)
-        // })
     }, [productId])
 
     if(loading) {
-        return <h1>Cargando...</h1>
+        return <h5>Cargando...</h5>
     }
 
     return(
         <div className='ItemDetailContainer' >
-            <h1>Detalle {product.name}</h1>
+            <h5>Detalle {product.name}</h5>
             <ItemDetail {...product} />
         </div>
     )

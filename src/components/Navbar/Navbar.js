@@ -16,8 +16,8 @@ const Navbar =() => {
         <nav className="NavBar navbar-expand-lg" >
             <h4 onClick={() => navigate ('/')}>Tienda</h4>
             <div>
-                <NavLink to="/category/vela" style={{ margin: 20 }}>Velas</NavLink>
-                <NavLink to="/category/difusor" style={{ margin: 20 }}>Difusores</NavLink>
+                <NavLink to="/category/vela" style={{ margin: 20 }}className="btn">Velas</NavLink>
+                <NavLink to="/category/difusor" style={{ margin: 20 }}className="btn">Difusores</NavLink>
             </div>
             <CartWidget quantity={totalQuantity}/>
         </nav>

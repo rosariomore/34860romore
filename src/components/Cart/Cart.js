@@ -17,7 +17,7 @@ const Cart = () => {
                     )
                 })
             }
-            <Link to='/checkout'>Checkout</Link>
+            <Link to='/checkout'className="btn btn-outline-secondary">Checkout</Link>
         </div>
     )
 }

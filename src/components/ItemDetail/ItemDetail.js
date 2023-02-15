@@ -22,12 +22,12 @@ const ItemDetail =({ name, id, img, category, description, stock, price}) => {
         <div className="container-fluid-item-detalle">
             <h4>{name}</h4>
             <p>{category}</p>
-            <img src={img} alt={name}/>
+            <img src={img} alt={name} style={{width:200}}/>
             <p>$ {price}</p>
             <p>Descripción: {description}</p>
             {
                 quantity > 0 ? (
-                    <Link to={"/cart"}>Finalizar Compra</Link>
+                    <Link to={"/cart"} className="btn btn-secondary" >Finalizar Compra</Link>
                 ) : (
                     <ItemCount stock={stock} onAdd={handleOnAdd}/>
                 )
