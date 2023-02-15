@@ -79,7 +79,34 @@ import { db } from "../../services/firebase/firebaseConfig"
     } else {
         return (
             <div>
+        <Fragment>
+        <form>
+                <h3>Checkout</h3>
 
+            <div>
+                <h2>Ingrese sus datos</h2>
+            </div>
+
+            <div className="col-m-d">
+                <input
+                    placeholder="Ingrese su Nombre"
+                    className="form-control"
+                />
+            </div>
+            <div className="col-m-d">
+                <input
+                    placeholder="Ingrese su Apellido"
+                    className="form-control"
+                    />
+            </div>   
+            <div className="col-m-d">
+                    <button className="btn" type="submit">Enviar</button>
+            </div>
+            <button onClick={createOrder}>Generar orden</button>
+        </form>
+            
+        </Fragment>
+                
                 
             </div>
         );
