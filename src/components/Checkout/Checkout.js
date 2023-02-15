@@ -1,22 +1,23 @@
 import { collection, query, where, documentId, getDocs, writeBatch, addDoc } from "firebase/firestore"
-import { useContext, useState } from "react"
+import { Fragment, useContext, useState } from "react"
 import { CartContext } from "../../context/CartContext"
 import { db } from "../../services/firebase/firebaseConfig"
 
     const Checkout = () => {
+
     const [loading, setLoading] = useState(false)
     const [orderId, setOrderId] = useState("")
     const { cart, total, clearCart} = useContext(CartContext)
 
-    const createOrder = async () => {
+    const createOrder = async (name, phone, email) => {
         setLoading(true)
         
                 
         const objOrder = {
             buyer: {
-                name: 'Maria Rosario More',
-                phone: '2236889403',
-                email: 'rosariomore@hotmail.com'
+                name,
+                phone,
+                email
             },
                 items: cart, 
                 total 
@@ -48,42 +49,41 @@ import { db } from "../../services/firebase/firebaseConfig"
             }
         })
 
-        if(outOfStock.length === 0) {
-            await batch.commit()
+        if (outOfStock.length === 0) {
+            await batch.commit();
 
-            const orderRef = collection(db, 'orders')
+            const orderRef = collection(db, "orders");
 
-            const orderAdded = await addDoc (orderRef, objOrder)
+            const orderAdded = await addDoc(orderRef, objOrder);
 
-            const { id } = orderAdded
-            
-            setOrderId(id)
+            const { id } = orderAdded;
 
-            clearCart()
+            setOrderId(id);
 
-            console.log(id)
+            clearCart();
+            setLoading(false);
+            console.log(id);
         } else {
-            console.error('hay productos fuera de stock')
+            console.error("hay productos fuera de stock");
         }
-    }
+    };
 
-    if(loading) {
-        return <h1>Generando orden...</h1>
-        }
-        else {
+    if (loading) {
+        return <h1>Generando orden...</h1>;
+    } else if (orderId) {
         return (
-        <div>
-        <h1>El Id de su compra es: {orderId}</h1>
-        </div>
-        )
-        }
-        
-    return (
-        <div>
-            <h1>Checkout</h1>
-            <button onClick={createOrder}>Generar orden</button>
-        </div>
-    )
-}
+            <div>
+                <h1>El Id de su compra es: {orderId}</h1>
+            </div>
+        );
+    } else {
+        return (
+            <div>
 
-export default Checkout
+                
+            </div>
+        );
+    }
+};
+
+export default Checkout;
